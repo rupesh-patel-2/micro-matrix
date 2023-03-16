@@ -1,0 +1,26 @@
+{
+    "name": "rupesh/micro-matrix",
+    "description": "Provides multi tenancy and syncromize data between microservices for laravel",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Rupesh\\MicroMatrix\\": "src/"
+        },
+        "autoload-dev": {
+            "psr-4": {
+                "Rupesh\\MicroMatrix\\": "src/",
+                "Tests\\": "tests/"
+            }
+        }
+    },
+    "authors": [
+        {
+            "name": "Rupesh Patel",
+            "email": "rupesh.patel@matrixhive.com"
+        }
+    ],
+    "require": {
+        "doctrine/dbal": "^3.0"
+    }
+    
+}
