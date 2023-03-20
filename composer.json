@@ -2,6 +2,7 @@
     "name": "rupesh/micro-matrix",
     "description": "Provides multi tenancy and syncromize data between microservices for laravel",
     "type": "library",
+    "version": "0.0.2",
     "autoload": {
         "psr-4": {
             "Rupesh\\MicroMatrix\\": "src/"
@@ -20,7 +21,8 @@
         }
     ],
     "require": {
-        "doctrine/dbal": "^3.0"
+        "doctrine/dbal": "^3.0",
+        "guzzlehttp/guzzle": "^7.5"
     }
     
 }

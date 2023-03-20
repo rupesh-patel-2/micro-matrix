@@ -4,7 +4,7 @@ namespace Rupesh\MicroMatrix\Traits;
 
 use Illuminate\Support\Facades\Schema;
 use Rupesh\MicroMatrix\Traits\Models\Common;
-use Rupesh\MicroMatrix\Models\ServiceSubscription;
+use Rupesh\MicroMatrix\Manager;
 /**
  * Use this trait in any model to make it listenable for other micro services
  */
@@ -28,10 +28,11 @@ trait Listener
     }
 
     public static function refreshSchema(){
-        //$dbConnection = self::getDBConnection();
-        //$schemaBuilder = $dbConnection->getSchemaBuilder();
+        $schema = Manager::getSchema( self::listenTo() );
+        if( $schema == false ){
+            return false;
+        }
 
-        $schema = ServiceSubscription::getSchema( self::listenTo() );
         $tableName = self::getTableName();
         $typesToMethods = self::typesToMethods();
         $listenTo = self::listenTo();
@@ -47,7 +48,6 @@ trait Listener
             });
         }
 
-        
         Schema::table( $tableName, function($table) use ( $schema, $listenTofields, $tableName ){
             foreach( $schema as $schemaField ){
                 if( in_array( $schemaField['field'] , $listenTofields ) ){
@@ -57,9 +57,7 @@ trait Listener
                     }
                 }
             }
-        });  
-        
-
+        });
 
     }
 
