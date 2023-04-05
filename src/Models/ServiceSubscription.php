@@ -4,6 +4,7 @@ namespace Rupesh\MicroMatrix\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Rupesh\MicroMatrix\Manager;
+use Illuminate\Support\Facades\Http;
 
 class ServiceSubscription extends Model
 {
@@ -12,7 +13,25 @@ class ServiceSubscription extends Model
         return $this->hasOne( Tenant::class );
     }
 
-    public static function getSchema(){
-        return json_decode('[{"field":"id","type":"bigint","primary":true},{"field":"first_name","type":"string"},{"field":"last_name","type":"string"},{"field":"birthdate","type":"date"},{"field":"created_at","type":"datetime"},{"field":"phone_number","type":"string"}]',true);
+    public function getSchema( $listenTo ) {
+        $schema = false;
+        $endPoints = self::getEndpoints();
+        $url = $this->url.$endPoints['listenables'];
+        $response = Http::get( $url );
+        if ( $response->successful() ) {
+            $body = json_decode( $response->body(), true);
+            
+            $model = $listenTo['model'];
+            if( isset($body['models'][$model]) ) {
+                $schema = $body['models'][$model];
+            }
+        }
+        return $schema;
+    }
+
+    public static function getEndpoints(){
+        return [
+            'listenables' => '/listenables'
+        ];
     }
 }

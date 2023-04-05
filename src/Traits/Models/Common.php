@@ -4,15 +4,15 @@ namespace Rupesh\MicroMatrix\Traits\Models;
 
 trait Common {
     public static function getTableName(){
-        return (new self())->getTable();
+        return with(new static)->getTable();
     }
 
     public static function getDBConnection(){
-        return (new self())->getConnection();
+        return with(new static)->getConnection();
     }
 
     public static function getPrimaryKeyName(){
-        return (new self())->getKeyName();
+        return with(new static)->getKeyName();
     }
 
     public static function typesToMethods(){
@@ -20,4 +20,5 @@ trait Common {
             'bigint' => 'biginteger'
         ];
     }
+
 }

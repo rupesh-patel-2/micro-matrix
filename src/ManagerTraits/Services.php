@@ -14,6 +14,9 @@ trait Services {
     public static function getSchema ( $listenTo ) {
         $schema = false;
         $serviceSubscription = self::getServiceSubscription( $listenTo['service'] );
+        if( $serviceSubscription ) {
+            $schema = $serviceSubscription->getSchema( $listenTo );
+        }
         return $schema;
     }
 }

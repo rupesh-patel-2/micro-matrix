@@ -3,12 +3,14 @@
 namespace Rupesh\MicroMatrix\Traits;
 
 use Rupesh\MicroMatrix\Traits\Models\Common;
+use Rupesh\MicroMatrix\Traits\Searchable;
+
 /**
  * Use this trait in any model to make it listenable for other micro services
  */
 trait Listenable
 {
-    use Common;
+    use Common,Searchable;
 
     public static function listenableFields(){
         return self::getDBConnection()->getSchemaBuilder()->getColumnListing(self::getTableName());

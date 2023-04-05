@@ -5,10 +5,12 @@ namespace Rupesh\MicroMatrix;
 use Rupesh\MicroMatrix\Utilities\SingletonAbstract;
 use Rupesh\MicroMatrix\Models\Application;
 use Rupesh\MicroMatrix\Models\Tenant;
+use Rupesh\MicroMatrix\ManagerTraits\Common;
 use Rupesh\MicroMatrix\ManagerTraits\Services;
+use Rupesh\MicroMatrix\ManagerTraits\Tenancy;
 
 class Manager extends SingletonAbstract {
-    use Services;
+    use Services,Common,Tenancy;
     protected $tenant = false;
     protected $application = false;
 

@@ -61,4 +61,8 @@ trait Listener
 
     }
 
+    public static function refreshRecords(){
+        
+    }
+
 }
