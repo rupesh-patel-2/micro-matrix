@@ -23,7 +23,6 @@ class ConfigureTenant implements ShouldQueue
 
     public function handle()
     {
-        
         Manager::tenantConfigResult( $this->tenant->configure() );
     }
 }
